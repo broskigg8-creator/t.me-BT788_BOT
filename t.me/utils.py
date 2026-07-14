@@ -106,6 +106,5 @@ BOLD_MAP = str.maketrans(
     "𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇"
 )
 
-
 def format_bold(text: str):
     return text.translate(BOLD_MAP)
