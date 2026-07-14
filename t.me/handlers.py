@@ -301,3 +301,122 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
 
         return
+    # UPPERCASE
+
+    if mode == "upper":
+
+        converted = to_upper(text)
+
+        await update.message.reply_text(
+            converted,
+            reply_markup=back_menu()
+        )
+
+        context.user_data.clear()
+
+        return
+
+    # LOWERCASE
+
+    if mode == "lower":
+
+        converted = to_lower(text)
+
+        await update.message.reply_text(
+            converted,
+            reply_markup=back_menu()
+        )
+
+        context.user_data.clear()
+
+        return
+
+    # TITLE CASE
+
+    if mode == "title":
+
+        converted = to_title(text)
+
+        await update.message.reply_text(
+            converted,
+            reply_markup=back_menu()
+        )
+
+        context.user_data.clear()
+
+        return
+
+    # SENTENCE CASE
+
+    if mode == "sentence":
+
+        converted = to_sentence(text)
+
+        await update.message.reply_text(
+            converted,
+            reply_markup=back_menu()
+        )
+
+        context.user_data.clear()
+
+        return
+
+    await update.message.reply_text(
+        "Please choose a tool from the menu first.",
+        reply_markup=main_menu()
+    )
+
+
+# ======================================================
+# UNKNOWN COMMAND
+# ======================================================
+
+async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+    await update.message.reply_text(
+        "❌ Unknown command.\n\nUse /start to open the main menu."
+    )
+
+
+# ======================================================
+# ERROR HANDLER
+# ======================================================
+
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
+
+    print(f"Error: {context.error}")
+
+
+# ======================================================
+# REGISTER ALL HANDLERS
+# ======================================================
+
+def get_handlers():
+
+    return [
+
+        CommandHandler(
+            "start",
+            start
+        ),
+
+        CommandHandler(
+            "about",
+            about
+        ),
+
+        CallbackQueryHandler(
+            buttons
+        ),
+
+        MessageHandler(
+            filters.TEXT & ~filters.COMMAND,
+            text_handler
+        ),
+
+        MessageHandler(
+            filters.COMMAND,
+            unknown
+        ),
+
+    ]
