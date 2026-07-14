@@ -25,9 +25,7 @@ def main():
     print(" BT788 Toolkit Bot is now running...")
     print("====================================")
 
-    application.run_polling(
-        allowed_updates=["message", "callback_query"]
-    )
+  application.run_polling()
 
 
 if __name__ == "__main__":
